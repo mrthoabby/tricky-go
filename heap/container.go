@@ -16,7 +16,11 @@ type Container[T any] struct {
 // less is a function that returns true if a should be sorted before b.
 // For a MinHeap, use func(a, b T) bool { return a < b }.
 // For a MaxHeap, use func(a, b T) bool { return a > b }.
+// less must not be nil.
 func New[T any](less func(a, b T) bool) *Container[T] {
+	if less == nil {
+		panic("heap.New: less comparator must not be nil")
+	}
 	heap := &heap[T]{
 		items: make([]T, 0),
 		less:  less,
@@ -58,6 +62,7 @@ func (instance *Container[T]) Len() int {
 }
 
 // Clear removes all elements from the heap.
+// It does not re-heapify; it just drops all items.
 func (instance *Container[T]) Clear() {
 	instance.internal.items = make([]T, 0)
 }

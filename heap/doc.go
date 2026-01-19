@@ -24,4 +24,6 @@
 //	        // Handle error
 //	    }
 //	}
+//
+// Note: the less comparator must not be nil.
 package heap
