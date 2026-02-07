@@ -9,6 +9,7 @@ High-performance generic data structures for Go.
   - [Heap](#heap)
   - [Set](#set)
   - [LinkedList](#linkedlist)
+  - [List](#list)
   - [Queue](#queue)
   - [Stack](#stack)
   - [Trie](#trie)
@@ -30,6 +31,7 @@ Or install specific packages:
 go get github.com/mrthoabby/tricky-go/heap
 go get github.com/mrthoabby/tricky-go/set
 go get github.com/mrthoabby/tricky-go/linkedlist
+go get github.com/mrthoabby/tricky-go/list
 go get github.com/mrthoabby/tricky-go/queue
 go get github.com/mrthoabby/tricky-go/stack
 go get github.com/mrthoabby/tricky-go/trie
@@ -156,6 +158,45 @@ func main() {
 - `Len()` - Count items
 - `Clear()` - Remove all items
 - `ToSlice()` - Convert to slice
+- `All()` - Iterate items without allocation
+
+[Back to top](#table-of-contents)
+
+---
+
+### List
+
+Slice-backed list with fast appends and sorting.
+
+**Use when:** You want an array-like list with sortable items.
+
+```go
+package main
+
+import "github.com/mrthoabby/tricky-go/list"
+
+func main() {
+    l, _ := list.NewWithCapacity[int](3)
+
+    l.Add(3)
+    l.Add(1)
+    l.Add(2)
+
+    l.Sort(func(a, b int) bool { return a < b })
+    l.Remove(1)
+}
+```
+
+**Methods:**
+- `New()` - Create empty list
+- `NewWithCapacity(capacity)` - Create empty list with reserved capacity
+- `Add(item)` - Add item
+- `Remove(index)` - Remove by index
+- `Sort(less)` - Sort items
+- `Get(index)` - Read by index
+- `Len()` - Count items
+- `Clear()` - Remove all items
+- `ToSlice()` - Copy to slice
 - `All()` - Iterate items without allocation
 
 [Back to top](#table-of-contents)
