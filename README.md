@@ -8,6 +8,7 @@ High-performance generic data structures for Go.
 - [Data Structures](#data-structures)
   - [Heap](#heap)
   - [Set](#set)
+  - [HashMap](#hashmap)
   - [LinkedList](#linkedlist)
   - [List](#list)
   - [Queue](#queue)
@@ -30,6 +31,7 @@ Or install specific packages:
 ```bash
 go get github.com/mrthoabby/tricky-go/heap
 go get github.com/mrthoabby/tricky-go/set
+go get github.com/mrthoabby/tricky-go/hashmap
 go get github.com/mrthoabby/tricky-go/linkedlist
 go get github.com/mrthoabby/tricky-go/list
 go get github.com/mrthoabby/tricky-go/queue
@@ -116,6 +118,46 @@ func main() {
 - `Length()` - Count items
 - `ToSlice()` - Convert to slice
 - `All()` - Iterate items without allocation (order not guaranteed)
+
+[Back to top](#table-of-contents)
+
+---
+
+### HashMap
+
+Key/value store with O(1) average lookups and updates.
+
+**Use when:** You need fast key-based access with minimal overhead.
+
+```go
+package main
+
+import "github.com/mrthoabby/tricky-go/hashmap"
+
+func main() {
+    m := hashmap.New[string, int]()
+
+    m.Set("apple", 3)
+    m.Set("banana", 2)
+
+    value, ok := m.Get("apple") // value = 3, ok = true
+    _ = value
+}
+```
+
+**Methods:**
+- `New()` - Create empty map
+- `NewWithCapacity(capacity)` - Create empty map with reserved capacity
+- `Set(key, value)` - Store value for key
+- `Get(key)` - Read value and exists flag
+- `Delete(key)` - Remove key
+- `Contains(key)` - Check if key exists
+- `Len()` - Count items
+- `Clear()` - Remove all items
+- `Keys()` - Get slice of keys (order not guaranteed)
+- `Values()` - Get slice of values (order not guaranteed)
+- `AsMap()` - Copy to built-in map
+- `All()` - Iterate key/value pairs without allocation (order not guaranteed)
 
 [Back to top](#table-of-contents)
 
